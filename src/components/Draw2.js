@@ -3,7 +3,7 @@ import Sketch from 'react-p5'
 
 let values = []
 let i = 0
-// let j = 0
+let w = 10
 let comp = 0
 let swaps = 0
 
@@ -21,11 +21,10 @@ export default class Draw extends Component {
   }
   setup = (p5, parentRef) => {
     p5.createCanvas(500, 500).parent(parentRef);
-    values = new Array(p5.width)
+    values = new Array(p5.width/w)
     for(let i = 0; i < values.length; i++){
       values[i] = Math.floor(p5.random(p5.height))
       // console.log(values[i])
-      // values[i] = noise(i/100.0)*height;
     }
   }
   draw = p5 => {
@@ -47,10 +46,10 @@ export default class Draw extends Component {
     }
     i++;
     for (let i = 0; i < values.length; i++) {
-      p5.stroke(256);
-      p5.line(i, p5.height, i, p5.height - values[i]);
-      p5.stroke(20);
-      // p5.line(i, p5.height, i, p5.height - values[i]);    
+      p5.fill(256, 0, 0);
+      p5.rect(i * w, p5.height - values[i], w, values[i])
+
+      // p5.line(i, p5.height, i, p5.height - values[i]);
     }
   }
   swap(arr, a, b){
