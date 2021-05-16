@@ -4,13 +4,27 @@ import Sketch from 'react-p5'
 let values = []
 let i = 0
 let j = 0
+let comp = 0
+let swaps = 0
+
 export default class Draw extends Component {
-    setup = (p5, parentRef) => {
+  constructor(props){
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      comps : 0,
+      swapp : 0,
+    }
+  }
+  handleChange( a, b) {
+    this.setState({ comps: a, swapp: b,})
+  }
+  setup = (p5, parentRef) => {
     p5.createCanvas(500, 500).parent(parentRef);
     values = new Array(p5.width)
     for(let i = 0; i < values.length; i++){
-      values[i] = p5.random(p5.height)
-      console.log(values[i])
+      values[i] = Math.floor(p5.random(p5.height))
+      // console.log(values[i])
       // values[i] = noise(i/100.0)*height;
     }
   }
@@ -21,16 +35,17 @@ export default class Draw extends Component {
       for (let j = 0; j < values.length - i - 1; j++) {
         let a = values[j];
         let b = values[j + 1];
+        comp++
         if (a > b) {
           this.swap(values, j, j + 1);
         }
     }
     } else {
       console.log('finished');
+      this.handleChange(comp, swaps)
       p5.noLoop();
     }
     i++;
-
     for (let i = 0; i < values.length; i++) {
       p5.stroke(256);
       p5.line(i, p5.height, i, p5.height - values[i]);
@@ -38,17 +53,20 @@ export default class Draw extends Component {
       // line(i, height, i, height - values[i]);    
     }
   }
-
   swap(arr, a, b){
     let temp = arr[a]
     arr[a] = arr[b]
     arr[b] = temp
+    swaps++
   }
-    render() {
-        return (
-            <div>
-               <Sketch setup={this.setup} draw={this.draw} />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <h1>Bubble Sort of {values.length} numbers in array</h1>
+        <h3>Number of comparisions: {this.state.comps}</h3>
+        <h4>Number of swaps: {this.state.swapp}</h4>
+        <Sketch setup={this.setup} draw={this.draw} />
+      </div>
+    )
+  }
 }
