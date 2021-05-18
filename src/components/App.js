@@ -1,17 +1,18 @@
 import React from 'react'
-import Nav from './Nav'
-import Draw from './Draw'
-import Draw1 from './Draw1'
-import Draw2 from './Draw2'
+// import Nav from './Nav'
+// import Draw from './Draw'
+// import Draw1 from './Draw1'
+// import Draw2 from './Draw2'
+import Tsp from './tsp'
 
 
 class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-        {/* <Nav /> */}
+        {/* <Nav />
 				{/* <h1>React-p5</h1> */}
-        <div style={{display: 'inline-block'}}>
+        {/* <div style={{display: 'inline-block'}}>
           <Draw />
         </div>
         <div style={{display: 'inline-block'}}>
@@ -19,7 +20,8 @@ class App extends React.Component {
         </div>
         <div style={{display: 'inline-block'}}>
           <Draw2 />
-        </div>
+        </div> */}
+        <Tsp />
 			</div>
 		);
 	}

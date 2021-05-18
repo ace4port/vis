@@ -3,7 +3,7 @@ import Sketch from 'react-p5'
 
 let values = []
 let states = []
-let w = 10
+let w = 25
 let comp = 0
 let swaps = 0
 
@@ -82,7 +82,7 @@ export default class Draw extends Component {
     }
   }
   async swap(arr, a, b){
-    await sleep(1)
+    await sleep(10)
     let temp = arr[a]
     arr[a] = arr[b]
     arr[b] = temp

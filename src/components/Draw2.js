@@ -3,7 +3,7 @@ import Sketch from 'react-p5'
 
 let values = []
 let i = 0
-let w = 10
+let w = 25
 let comp = 0
 let swaps = 0
 
@@ -29,7 +29,7 @@ export default class Draw extends Component {
   }
   draw = p5 => {
     p5.background(0)
-    // p5.ellipse(100, 100, 100)
+    p5.frameRate(5)
     if (i < values.length) {
       for (let j = 0; j < values.length - i - 1; j++) {
         let a = values[j];
@@ -58,6 +58,7 @@ export default class Draw extends Component {
     arr[b] = temp
     swaps++
   }
+
   render() {
     return (
       <div>
