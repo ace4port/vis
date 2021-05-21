@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Bubble from "./Bubble"
 import Quick from "./Quick"
 import Insertion from "./Insertion"
+import Merge from "./Merge"
 
 const Wrapper = () => {
 	const [arrP, setArrP] = useState({ width: 10, speed: 50 })
@@ -46,6 +47,14 @@ const Wrapper = () => {
 							onClick={() => setType(2)}
 						/>
 						<label htmlFor='quick'>Quick Sort</label>
+						<input
+							type='radio'
+							name='sort'
+							id='merge'
+							value='Merge'
+							onClick={() => setType(3)}
+						/>
+						<label htmlFor='merge'>Merge Sort</label>
 					</div>
 					<div>
 						<label htmlFor='width'>Choose array size</label>
@@ -81,7 +90,9 @@ const Wrapper = () => {
 					? controller && <Bubble width={arrP.width} speed={arrP.speed} />
 					: type === 1
 					? controller && <Insertion width={arrP.width} speed={arrP.speed} />
-					: controller && <Quick width={arrP.width} speed={arrP.speed} />}
+					: type === 2
+					? controller && <Quick width={arrP.width} speed={arrP.speed} />
+					: controller && <Merge width={arrP.width} speed={arrP.speed} />}
 			</div>
 		</div>
 	)

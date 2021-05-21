@@ -4,7 +4,7 @@ import Sketch from "react-p5"
 let values = []
 let clr = []
 
-export default class Insertion extends Component {
+export default class Draw extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -13,11 +13,11 @@ export default class Insertion extends Component {
 			comp: 0,
 			swap: 0,
 		}
-		this.calc = this.calc.bind(this)
+		this.incComp = this.incComp.bind(this)
+		this.incSwap = this.incSwap.bind(this)
 	}
-	incComp = () => this.setState({ ...this.state, comp: this.state.comp + 1 })
-	incSwap = () => this.setState({ ...this.state, swap: this.state.swap + 1 })
-	calc = (a, b) => this.setState({ comp: a, swap: b })
+	incComp = () => this.setState({ comp: this.state.comp + 1 })
+	incSwap = () => this.setState({ swap: this.state.swap + 1 })
 
 	setup = (p5, parentRef) => {
 		p5.createCanvas(500, 400).parent(parentRef)
@@ -26,21 +26,39 @@ export default class Insertion extends Component {
 			values[i] = Math.floor(p5.random(p5.height))
 			clr[i] = -1
 		}
-		this.insertion(values)
+		this.bubble(values, p5)
 	}
 
 	draw = (p5) => {
 		p5.background(0)
 		for (let i = 0; i < values.length; i++) {
-			if (clr[i] === 0) p5.fill(255, 0, 0)
-			else if (clr[i] === 1) p5.fill(0, 255, 0)
-			else p5.fill(0, 0, 256)
+			switch (clr[i]) {
+				case 0:
+					p5.fill(256, 0, 0)
+					break
+				case 1:
+					p5.fill(0, 255, 0)
+					break
+				default:
+					p5.fill(0, 0, 255)
+			}
 			let w = this.state.width
 			p5.rect(i * w, p5.height - values[i], w, values[i])
-			//line(i, p5,height, i, p5.height - values[i])
+			// p5.line(i, p5.height, i, p5.height - values[i]);
 		}
 	}
-
+	async bubble(arr, p5) {
+		for (let i = 0; i < arr.length; i++) {
+			for (let j = 0; j < arr.length - 1; j++) {
+				this.incComp()
+				clr[j] = 0
+				clr[j + 1] = 1
+				if (arr[j] > arr[j + 1]) await this.swap(arr, j, j + 1)
+				clr[j] = clr[j + 1] = -1
+			}
+		}
+		p5.noLoop()
+	}
 	async insertion(arr) {
 		for (let i = 1; i < arr.length; i++) {
 			let j = i
@@ -54,12 +72,11 @@ export default class Insertion extends Component {
 			}
 		}
 	}
-
-	async swap(a, x, y) {
+	async swap(arr, a, b) {
 		await this.sleep(this.props.speed)
-		let temp = a[x]
-		a[x] = a[y]
-		a[y] = temp
+		let temp = arr[a]
+		arr[a] = arr[b]
+		arr[b] = temp
 		this.incSwap()
 	}
 	sleep(s) {
@@ -68,12 +85,12 @@ export default class Insertion extends Component {
 
 	render() {
 		return (
-			<>
-				<h1>Insertion Sort of {values.length} numbers in array</h1>
+			<div>
+				<h1> Bubble Sort of {values.length} numbers in array</h1>
 				<h3>Number of comparisions: {this.state.comp}</h3>
 				<h4>Number of swaps: {this.state.swap}</h4>
 				<Sketch setup={this.setup} draw={this.draw} />
-			</>
+			</div>
 		)
 	}
 }

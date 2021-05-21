@@ -26,7 +26,7 @@ export default class Draw extends Component {
 			values[i] = Math.floor(p5.random(p5.height))
 			clr[i] = -1
 		}
-		this.bubble(values)
+		this.bubble(values, p5)
 	}
 
 	draw = (p5) => {
@@ -47,7 +47,7 @@ export default class Draw extends Component {
 			// p5.line(i, p5.height, i, p5.height - values[i]);
 		}
 	}
-	async bubble(arr) {
+	async bubble(arr, p5) {
 		for (let i = 0; i < arr.length; i++) {
 			for (let j = 0; j < arr.length - 1; j++) {
 				this.incComp()
@@ -57,6 +57,7 @@ export default class Draw extends Component {
 				clr[j] = clr[j + 1] = -1
 			}
 		}
+		p5.noLoop()
 	}
 	async swap(arr, a, b) {
 		await this.sleep(this.props.speed)
