@@ -20,7 +20,7 @@ export default class Draw extends Component {
 	incSwap = () => this.setState({ swap: this.state.swap + 1 })
 
 	setup = (p5, parentRef) => {
-		p5.createCanvas(500, 500).parent(parentRef)
+		p5.createCanvas(500, 400).parent(parentRef)
 		values = new Array(p5.width / this.state.width)
 		for (let i = 0; i < values.length; i++) {
 			values[i] = Math.floor(p5.random(p5.height))

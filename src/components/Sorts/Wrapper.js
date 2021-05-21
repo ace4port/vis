@@ -5,6 +5,7 @@ import Insertion from "./Insertion"
 
 const Wrapper = () => {
 	const [arrP, setArrP] = useState({ width: 10, speed: 50 })
+	const [type, setType] = useState(0)
 	const [controller, setController] = useState(false)
 
 	const handleChange = (e) => {
@@ -20,6 +21,32 @@ const Wrapper = () => {
 			<h1>Sorting algorithms Visualized using React and p5</h1>
 			<article className='form-wrapper'>
 				<form className='form'>
+					<div>
+						<input
+							type='radio'
+							name='sort'
+							id='bubble'
+							value='bubble'
+							onClick={() => setType(0)}
+						/>
+						<label htmlFor='bubble'>Bubble Sort</label>
+						<input
+							type='radio'
+							name='sort'
+							id='insertion'
+							value='insertion'
+							onClick={() => setType(1)}
+						/>
+						<label htmlFor='insertion'>Insertion Sort</label>
+						<input
+							type='radio'
+							name='sort'
+							id='quick'
+							value='Quick'
+							onClick={() => setType(2)}
+						/>
+						<label htmlFor='quick'>Quick Sort</label>
+					</div>
 					<div>
 						<label htmlFor='width'>Choose array size</label>
 						<input
@@ -50,13 +77,11 @@ const Wrapper = () => {
 				</form>
 			</article>
 			<div style={{ display: "inline-block" }}>
-				{controller && <Bubble width={arrP.width} speed={arrP.speed} />}
-			</div>
-			<div style={{ display: "inline-block" }}>
-				{controller && <Insertion width={arrP.width} speed={arrP.speed} />}
-			</div>
-			<div style={{ display: "inline-block" }}>
-				{/* {controller && <Quick width={arrP.width} speed={arrP.speed} />} */}
+				{type === 0
+					? controller && <Bubble width={arrP.width} speed={arrP.speed} />
+					: type === 1
+					? controller && <Insertion width={arrP.width} speed={arrP.speed} />
+					: controller && <Quick width={arrP.width} speed={arrP.speed} />}
 			</div>
 		</div>
 	)

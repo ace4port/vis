@@ -20,7 +20,7 @@ export default class Insertion extends Component {
 	calc = (a, b) => this.setState({ comp: a, swap: b })
 
 	setup = (p5, parentRef) => {
-		p5.createCanvas(500, 500).parent(parentRef)
+		p5.createCanvas(500, 400).parent(parentRef)
 		values = new Array(p5.width / parseInt(this.state.width))
 		for (let i = 0; i < values.length; i++) {
 			values[i] = Math.floor(p5.random(p5.width))

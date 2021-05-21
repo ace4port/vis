@@ -26,7 +26,7 @@ export default class Draw extends Component {
 	calc = (x, y) => this.setState({ ...this.state, comp: x, swap: y })
 
 	setup = (p5, parentRef) => {
-		p5.createCanvas(500, 500).parent(parentRef)
+		p5.createCanvas(500, 400).parent(parentRef)
 		let w = this.state.width
 		values = new Array(p5.width / w)
 		for (let i = 0; i < values.length; i++) {
