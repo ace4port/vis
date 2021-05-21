@@ -8,6 +8,7 @@ let total
 let fact = 0
 let recordDistance
 let best
+let x = 10
 
 export default class Tsp extends Component {
 	setup = (p5, parentRef) => {
@@ -23,32 +24,31 @@ export default class Tsp extends Component {
 		console.log(recordDistance)
 		best = order.slice()
 		total = this.factorial(totalCities)
-		// console.log(total)
 	}
 	draw = (p5) => {
 		p5.background(0)
-		p5.stroke(255) // draw lines showing processing
-		// p5.translate(0, p5.height / 2)
+		p5.stroke(255)
+		p5.frameRate(x)
 		for (let i = 0; i < cities.length; i++) {
-			p5.ellipse(cities[i].x, cities[i].y, 8, 8)
+			p5.ellipse(cities[i].x, cities[i].y, 8, 8) // draw nodes/cities
 		}
 		p5.noFill()
-		p5.beginShape()
+		p5.beginShape() // draw lines showing processing - calculating
 		for (let i = 0; i < order.length; i++) {
 			let n = order[i]
 			p5.vertex(cities[n].x, cities[n].y)
 		}
 		p5.endShape()
 
-		var d = this.calcDistance(p5, cities, order)
+		var d = this.calcDistance(p5, cities, order) // calculate total distance between all nodes
 		if (d < recordDistance) {
 			recordDistance = d
 			best = order.slice()
 		}
-		p5.textSize(24)
+		p5.textSize(24) // display text showing percentage process
 		p5.fill(255)
 		var percent = 100 * (fact / total)
-		p5.text(p5.nf(percent, 0, 2) + "% completed", 20, p5.height - 20)
+		p5.text(p5.nf(percent, 0, 4) + "% completed", 20, p5.height - 20)
 		this.nextOrder(p5)
 	}
 	drew = (p5) => {
@@ -87,6 +87,7 @@ export default class Tsp extends Component {
 		console.log(sum)
 		return sum
 	}
+	//this function below is to generate lexical order
 	nextOrder(p5) {
 		fact++ // https://www.quora.com/How-would-you-explain-an-algorithm-that-generates-permutations-using-lexicographic-ordering
 		// Find the largest x such that P[x]<P[x+1].
@@ -119,11 +120,19 @@ export default class Tsp extends Component {
 		return (
 			<>
 				<h1>Travelling Salesman Problem using Brute force(Lexicographic)</h1>
-				<div style={{ display: "inline-block" }}>
-					<Sketch setup={this.setup} draw={this.draw} />
-				</div>
-				<div style={{ display: "inline-block" }}>
-					<Sketch setup={this.setup} draw={this.drew} />
+				<input
+					type='number'
+					placeholder={totalCities}
+					style={{ width: "40px" }}
+				></input>
+				<button type='submit'>Enter</button>
+				<div>
+					<div style={{ display: "inline-block" }}>
+						<Sketch setup={this.setup} draw={this.draw} />
+					</div>
+					<div style={{ display: "inline-block" }}>
+						<Sketch setup={this.setup} draw={this.drew} />
+					</div>
 				</div>
 			</>
 		)
