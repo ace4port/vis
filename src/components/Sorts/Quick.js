@@ -46,7 +46,6 @@ export default class Draw extends Component {
 			this.quickSort(arr, index + 1, e),
 		])
 	}
-
 	async partition(arr, s, e) {
 		for (let i = s; i < e; i++) {
 			states[i] = 1
