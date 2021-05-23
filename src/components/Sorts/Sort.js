@@ -4,7 +4,7 @@ import Sketch from "react-p5"
 let values = []
 let clr = []
 let w = [100, 100, 50, 25, 10, 2]
-let s = [3, 5, 50, 250, 500, 1000]
+let s = [1, 5, 50, 250, 500, 1000]
 
 export default class Draw extends Component {
 	constructor(props) {
@@ -43,13 +43,13 @@ export default class Draw extends Component {
 		for (let i = 0; i < values.length; i++) {
 			switch (clr[i]) {
 				case 0:
-					p5.fill(256, 0, 0)
+					p5.fill(250, 250, 0)
 					break
 				case 1:
-					p5.fill(0, 255, 0)
+					p5.fill(0, 255, 255)
 					break
 				default:
-					p5.fill(0, 0, 255)
+					p5.fill(255, 0, 255)
 			}
 			let w = this.state.width
 			p5.rect(i * w, p5.height - values[i], w, values[i])
@@ -73,6 +73,7 @@ export default class Draw extends Component {
 	async insertion(arr, p5) {
 		for (let i = 1; i < arr.length; i++) {
 			let j = i
+			this.incComp()
 			while (j > 0 && arr[j - 1] > arr[j]) {
 				this.incComp()
 				clr[j] = 0
@@ -101,24 +102,25 @@ export default class Draw extends Component {
 			if (L[i] <= R[j]) {
 				this.incComp()
 				arr[k] = L[i]
+				// await this.sleep(this.state.speed)
 				i++
 			} else {
 				this.incComp()
 				arr[k] = R[j]
 				j++
 			}
+			this.incSwap()
 			k++
 		}
+		await this.sleep(this.state.speed)
 		while (i < n1) {
 			this.incComp() // Copy the remaining elements of L[], if there are any
-			await this.sleep(this.state.speed)
 			arr[k] = L[i]
 			i++
 			k++
 		}
 		while (j < n2) {
 			this.incComp() // Copy the remaining elements of R[], if there are any
-			await this.sleep(this.state.speed)
 			arr[k] = R[j]
 			j++
 			k++
@@ -128,15 +130,14 @@ export default class Draw extends Component {
 	async mergeSort(arr, l, r) {
 		if (l >= r) return //returns recursively
 		var m = l + parseInt((r - l) / 2)
-		await this.sleep(this.state.speed)
-		await this.mergeSort(arr, l, m)
-		await this.sleep(this.state.speed)
-		await this.mergeSort(arr, m + 1, r)
-		await this.sleep(this.state.speed)
-		await this.merge(arr, l, m, r)
+		await Promise.all([
+			await this.mergeSort(arr, l, m),
+			await this.mergeSort(arr, m + 1, r),
+			await this.merge(arr, l, m, r),
+		])
 	} //# This code is contributed by Mayank Khanna taken from Geeks4Geeks.org
 
-	async quickSort(arr, s, e) {
+	async quickSort(arr, s, e, p5) {
 		if (s > e) return
 		this.incComp()
 		let index = await this.partition(arr, s, e)
@@ -158,6 +159,7 @@ export default class Draw extends Component {
 			if (arr[i] < pivotValue) {
 				await this.swap(arr, i, pivotIndex)
 				clr[pivotIndex] = -1
+				this.incComp()
 				pivotIndex++
 				clr[pivotIndex] = 0
 			}
@@ -170,7 +172,7 @@ export default class Draw extends Component {
 	}
 
 	async swap(arr, a, b) {
-		await this.sleep(this.props.speed)
+		this.state.width < 200 && (await this.sleep(this.state.speed))
 		let temp = arr[a]
 		arr[a] = arr[b]
 		arr[b] = temp
@@ -183,9 +185,9 @@ export default class Draw extends Component {
 	render() {
 		return (
 			<div>
-				{/* <h1> Bubble Sort of {values.length} numbers in array</h1> */}
 				<h3>
-					Number of comparisions: {this.state.comp} - Number of swaps:{" "}
+					Array Size: {values.length} Number of comparisions: {this.state.comp}{" "}
+					- Number of swaps:
 					{this.state.swap}
 				</h3>
 				<Sketch setup={this.setup} draw={this.draw} />
