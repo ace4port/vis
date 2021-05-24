@@ -1,21 +1,22 @@
 import React, { Component } from "react"
+import { Container } from "@material-ui/core"
 import Sketch from "react-p5"
 
 let cities = []
-let totalCities = 7
 let order = []
+let totalCities = 7
 let total
 let fact = 0
 let recordDistance
 let best
-let x = 10
+// let x = 120
 
 export default class Tsp extends Component {
 	setup = (p5, parentRef) => {
-		p5.createCanvas(500, 500).parent(parentRef)
+		p5.createCanvas(800, 500).parent(parentRef)
 		for (let i = 0; i < totalCities; i++) {
 			cities[i] = p5.createVector(
-				p5.random(p5.width),
+				p5.random(p5.width / 2),
 				p5.random(p5.height * 0.9)
 			)
 			order[i] = i
@@ -28,7 +29,7 @@ export default class Tsp extends Component {
 	draw = (p5) => {
 		p5.background(0)
 		p5.stroke(255)
-		p5.frameRate(x)
+		// p5.frameRate(x)
 		for (let i = 0; i < cities.length; i++) {
 			p5.ellipse(cities[i].x, cities[i].y, 8, 8) // draw nodes/cities
 		}
@@ -40,7 +41,7 @@ export default class Tsp extends Component {
 		}
 		p5.endShape()
 
-		var d = this.calcDistance(p5, cities, order) // calculate total distance between all nodes
+		let d = this.calcDistance(p5, cities, order) // calculate total distance between all nodes
 		if (d < recordDistance) {
 			recordDistance = d
 			best = order.slice()
@@ -49,10 +50,7 @@ export default class Tsp extends Component {
 		p5.fill(255)
 		var percent = 100 * (fact / total)
 		p5.text(p5.nf(percent, 0, 4) + "% completed", 20, p5.height - 20)
-		this.nextOrder(p5)
-	}
-	drew = (p5) => {
-		p5.background(0)
+		p5.translate(p5.width / 2, 0)
 		p5.textSize(24)
 		p5.fill(255)
 		p5.text("Best Case scenario found", 20, p5.height - 20)
@@ -70,6 +68,7 @@ export default class Tsp extends Component {
 			p5.vertex(cities[n].x, cities[n].y)
 		}
 		p5.endShape()
+		this.nextOrder(p5)
 	}
 	swap(a, i, j) {
 		let temp = a[i]
@@ -118,7 +117,7 @@ export default class Tsp extends Component {
 	}
 	render() {
 		return (
-			<>
+			<Container>
 				<h1>Travelling Salesman Problem using Brute force(Lexicographic)</h1>
 				<input
 					type='number'
@@ -127,14 +126,9 @@ export default class Tsp extends Component {
 				></input>
 				<button type='submit'>Enter</button>
 				<div>
-					<div style={{ display: "inline-block" }}>
-						<Sketch setup={this.setup} draw={this.draw} />
-					</div>
-					<div style={{ display: "inline-block" }}>
-						<Sketch setup={this.setup} draw={this.drew} />
-					</div>
+					<Sketch setup={this.setup} draw={this.draw} />
 				</div>
-			</>
+			</Container>
 		)
 	}
 }
