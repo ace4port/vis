@@ -1,16 +1,17 @@
 import React from "react";
-import Drawer from "./Drawer";
+import Menu from "./Menu";
 import Sorts from "./Sorts/Wrapper";
 import Tsp from "./TSP/Tsp";
 import Error from "./Error";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Lex from "./TSP/Lex";
+import Lex3 from "./TSP/Lex3";
 
 class App extends React.Component {
 	render() {
 		return (
 			<Router>
-				<Drawer />
+				<Menu />
 				<Switch>
 					<Router exact path='/'>
 						<Sorts />
@@ -23,6 +24,9 @@ class App extends React.Component {
 					</Route>
 					<Route exact path='/lex'>
 						<Lex />
+					</Route>
+					<Route exact path='/lex3'>
+						<Lex3 />
 					</Route>
 					<Route exact path='*'>
 						<Error />

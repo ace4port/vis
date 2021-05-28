@@ -14,6 +14,7 @@ export default class Tsp extends Component {
 		this.state = {
 			nodes: this.props.nodes,
 			count: 0,
+			speed: this.props.speed,
 		};
 		this.incCount = this.incCount.bind(this);
 	}
@@ -28,6 +29,9 @@ export default class Tsp extends Component {
 	// }
 	componentWillUnmount() {
 		this.setState({ count: 0, nodes: [] });
+		// while (cities.length > 0) {
+		// 	cities.pop();
+		// }
 	}
 	setup = (p5, parentRef) => {
 		p5.createCanvas(800, 500).parent(parentRef);
@@ -41,7 +45,7 @@ export default class Tsp extends Component {
 	};
 	draw = (p5) => {
 		p5.background(0);
-		// p5.frameRate(x)
+		p5.frameRate(this.state.speed);
 		p5.stroke(255);
 		for (let i = 0; i < cities.length; i++)
 			p5.ellipse(cities[i].x, cities[i].y, 8, 8); // draw nodes/cities
@@ -139,7 +143,8 @@ function calcDistance(p, o) {
 		// let d = p5.dist(cityA.x, cityA.y, cityB.x, cityB.y);
 		let xD = cityA.x - cityB.x;
 		let yD = cityA.y - cityB.y;
-		let d = Math.sqrt(xD * xD + yD * yD);
+		let d = Math.hypot(xD, yD);
+		// let d = Math.sqrt(xD * xD + yD * yD);
 		sum += d;
 	}
 	return sum;
