@@ -1,3 +1,4 @@
+Right now Sort and Tsp are working.
 # View it live [here](https://peaceful-franklin-f53cb9.netlify.app/)
 # Previous [version](https://p5-algovis.netlify.app/)
 
