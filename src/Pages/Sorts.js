@@ -1,61 +1,37 @@
-import React, { useState } from "react"
-// import Bubble from "./Bubble"
-// import Quick from "./Quick"
-// import Insertion from "./Insertion"
-// import Merge from "./Merge"
-import Sort from "./Sort"
-import { Button, Container, CssBaseline } from "@material-ui/core"
-import {
-	Radio,
-	FormControlLabel,
-	FormLabel,
-	FormControl,
-	RadioGroup,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import Slider from "@material-ui/core/Slider"
-import Grid from "@material-ui/core/Grid"
-import Input from "@material-ui/core/Input"
+import React, { useState } from "react";
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		// display: "flex",
-	},
-	sld: { width: 400 },
-	content: {
-		background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-		flexGrow: 1,
-		marginTop: "100px",
-		paddingTop: "100px",
-	},
-}))
+import Sort from "../components/Sorts/Sort";
+import useStyles from "../components/styles";
+
+import { Button, Container, CssBaseline } from "@material-ui/core";
+import { Radio, FormControlLabel, FormLabel } from "@material-ui/core";
+import { FormControl, RadioGroup } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
+import Grid from "@material-ui/core/Grid";
+import Input from "@material-ui/core/Input";
+
 const Wrapper = () => {
-	const [type, setType] = useState("bubble")
-	const [controller, setController] = useState(false)
+	const classes = useStyles();
+	const [type, setType] = useState("bubble");
+	const [controller, setController] = useState(false);
 	// const [value, setValue] = useState(50)
-	const [width, setWidth] = useState(2)
-	const [speed, setSpeed] = useState(2)
+	const [width, setWidth] = useState(2);
+	const [speed, setSpeed] = useState(2);
 
 	const handleVal = (event) => {
-		setType(event.target.value)
-	}
+		setType(event.target.value);
+	};
 
 	const setW = (e, w) => {
-		setWidth(w)
-	}
-	const setS = (e, s) => setSpeed(s)
+		setWidth(w);
+	};
+	const setS = (e, s) => setSpeed(s);
 	const handleSubmit = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		// setArrP({ width: parseInt(e.target.value), speed: e.target.value })
-		setController(!controller)
-	}
-	const useStyles = makeStyles((theme) => ({
-		root: {
-			width: 300,
-			marginLeft: "20px",
-		},
-	}))
+		setController(!controller);
+	};
 	const marks = [
 		{
 			value: 1,
@@ -77,16 +53,15 @@ const Wrapper = () => {
 			value: 5,
 			label: "250",
 		},
-	]
+	];
 	function valuetext(value) {
-		return `${value}`
+		return `${value}`;
 	}
-	const classes = useStyles()
 
 	return (
 		<>
 			<Container style={{ margin: "100px 300px", width: "800px" }}>
-				<h2>Sorting algorithms Visualized using React and p5</h2>
+				{/* <h2>Sorting algorithms Visualized using React and p5</h2> */}
 				{!controller && (
 					<article className='form-wrapper'>
 						<form className='form'>
@@ -197,7 +172,7 @@ const Wrapper = () => {
 				{controller && <Sort width={width} speed={speed} type={type} />}
 			</Container>
 		</>
-	)
-}
+	);
+};
 
-export default Wrapper
+export default Wrapper;
