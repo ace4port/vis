@@ -29,9 +29,7 @@ const Menu = () => {
 					<Button color='inherit'>Sort</Button>
 				</Link>
 				<Link to='/compare' className={classes.link}>
-					<Button color='inherit' disabled>
-						Compare
-					</Button>
+					<Button color='inherit'>Compare</Button>
 				</Link>
 				<Link to='/lex' className={classes.link}>
 					<Button color='inherit'>TSP</Button>

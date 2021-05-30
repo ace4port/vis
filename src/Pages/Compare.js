@@ -9,16 +9,17 @@ const Compare = () => {
 	const [controller, setController] = useState(false);
 
 	const compare = () => {
-		if (cmp === 0) setController((state) => !state);
+		setController((state) => !state);
 	};
 
 	return (
 		<Container>
 			<h1>asd</h1>
+			<h5>This page is still is development; rampant with bugs</h5>
 			<FormControl variant='filled' className={classes.FormControl}>
 				<Grid>
 					<InputLabel id='compType'>Select Algortihms</InputLabel>
-					<Select labelId='compType' id='compType' value={cmp} onChange={(e) => e.target.value}>
+					<Select labelId='compType' id='compType' value={cmp} onChange={(e) => setCmp(e.target.value)}>
 						<MenuItem value={0}>Bubble and Insertion</MenuItem>
 						<MenuItem value={1}>Bubble and Merge</MenuItem>
 						<MenuItem value={2}>Bubble and Quick</MenuItem>
@@ -33,7 +34,7 @@ const Compare = () => {
 					</Button>
 				</Grid>
 			</FormControl>
-			{controller && <Sort />}
+			{controller && <Sort type={cmp} />}
 		</Container>
 	);
 };
