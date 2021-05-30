@@ -2,11 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		width: 300,
 		marginLeft: "20px",
 		display: "flex",
 		flexGrow: 1,
-		// display: "flex",
+		width: "100%",
+		"& > * + *": {
+			marginTop: theme.spacing(2),
+		},
 	},
 	sld: { width: 400 },
 	content: {
@@ -18,9 +20,20 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		flexGrow: 1,
 	},
-	// appBar: {
-	// 	zIndex: theme.zIndex.drawer + 1,
-	// },
+	link: {
+		textDecoration: "none",
+		color: "white",
+	},
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+	},
+	selectEmpty: {
+		marginTop: theme.spacing(2),
+	},
+	btnCmp: {
+		margin: theme.spacing(1),
+	},
 	// content: {
 	// 	flexGrow: 1,
 	// 	padding: theme.spacing(3),

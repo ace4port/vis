@@ -11,7 +11,7 @@ import Graph from "./Pages/Graph";
 import Tree from "./Pages/Tree";
 
 // import Lex from "./components/TSP/Lex";
-// import Lex3 from "./components/TSP/Lex3";
+import Lex3 from "./components/TSP/Lex3";
 import Sort from "./components/Sorts";
 
 const App = () => {
@@ -36,6 +36,9 @@ const App = () => {
 				</Route>
 				<Route exact path='/lex'>
 					<Trav />
+				</Route>
+				<Route exact path='/lex3'>
+					<Lex3 />
 				</Route>
 				<Route exact path='/srt'>
 					<Sort />

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button, Container, Typography } from "@material-ui/core";
-import { Slider, TextField, Grid } from "@material-ui/core";
+import { Slider, Grid } from "@material-ui/core";
+import { MenuItem, FormHelperText, FormControl } from "@material-ui/core";
+import { InputLabel, Select } from "@material-ui/core";
 import Sketch from "react-p5";
 import Lex2 from "../components/TSP/Lex2";
 
@@ -39,10 +41,7 @@ export default class Collect extends Component {
 	};
 	genRandom(n) {
 		for (let i = 0; i < n; i++) {
-			let x = new Node(
-				parseInt(Math.random() * 400),
-				parseInt(Math.random() * 400)
-			);
+			let x = new Node(parseInt(Math.random() * 400), parseInt(Math.random() * 400));
 			nodes[i] = x;
 		}
 		console.log(nodes);
@@ -84,29 +83,43 @@ export default class Collect extends Component {
 							<Typography>Speed</Typography>
 							<Slider
 								defaultValue={this.state.speed}
-								// getAriaValueText={"Speed"}
 								aria-labelledby='speed'
-								// valueLabelDisplay='auto'
+								valueLabelDisplay='auto'
 								name='speed'
 								step={1}
 								min={1}
 								max={5}
-								// marks={marks}
 								value={this.state.speed}
 								onChange={this.setSpeed}
 							/>
 						</Grid>
+						<Button type='button' varaint='contained' size='small' color='primary' onClick={this.clearNodes}>
+							CLEAR!
+						</Button>
 						<Grid item={6}>
-							<TextField
-								id='filled-number'
-								label='Number'
-								type='number'
-								InputLabelProps={{
-									shrink: true,
-								}}
-								variant='filled'
-								onChange={(e) => this.setState({ n: e.target.value })}
-							/>
+							<FormControl
+							// className={classes.formControl}
+							>
+								<InputLabel id='nodeNum'>Number of Nodes</InputLabel>
+								<Select
+									labelId='nodeNum'
+									id='nodeNum'
+									value={this.state.n}
+									onChange={(e) => this.setState({ n: e.target.value })}
+								>
+									<MenuItem value={4}>4</MenuItem>
+									<MenuItem value={5}>5</MenuItem>
+									<MenuItem value={6}>6</MenuItem>
+									<MenuItem value={7}>7</MenuItem>
+									<MenuItem value={8}>8</MenuItem>
+									<MenuItem value={9}>9</MenuItem>
+									<MenuItem value={10}>10</MenuItem>
+									<MenuItem value={12}>12</MenuItem>
+									<MenuItem value={15}>15</MenuItem>
+									<MenuItem value={20}>20</MenuItem>
+								</Select>
+								<FormHelperText>Pick between 4 and 7</FormHelperText>
+							</FormControl>
 						</Grid>
 						<Button
 							type='button'
@@ -115,36 +128,14 @@ export default class Collect extends Component {
 							color='primary'
 							onClick={() => this.genRandom(this.state.n)}
 						>
-							Generate Random nodes
+							Generate Random
 						</Button>
-						<Button
-							type='button'
-							varaint='contained'
-							size='small'
-							color='primary'
-							onClick={this.clearNodes}
-						>
-							CLEAR!
-						</Button>
-						<Button
-							type='button'
-							varaint='contained'
-							size='small'
-							color='secondary'
-							onClick={this.setCalc}
-						>
+						<Button type='button' varaint='contained' size='small' color='secondary' onClick={this.setCalc}>
 							GO!
 						</Button>
 					</Grid>
 				</form>
-				{!this.state.calc && (
-					<Sketch
-						setup={this.setup}
-						draw={this.draw}
-						// keyPressed={this.keyPressed}
-						mouseClicked={this.mouseClicked}
-					/>
-				)}
+				{!this.state.calc && <Sketch setup={this.setup} draw={this.draw} mouseClicked={this.mouseClicked} />}
 				{this.state.calc && <Lex2 nodes={nodes} speed={this.state.speed} />}
 				{console.log(nodes.length)}
 			</Container>
