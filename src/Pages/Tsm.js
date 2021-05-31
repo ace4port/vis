@@ -5,6 +5,7 @@ import { MenuItem, FormHelperText, FormControl } from "@material-ui/core";
 import { InputLabel, Select } from "@material-ui/core";
 import Sketch from "react-p5";
 import Lex2 from "../components/TSP/Lex2";
+import useStyles from "../components/styles";
 
 let nodes = [];
 let frame = [2, 5, 10, 30, 60];

@@ -9,6 +9,7 @@ export default class Draw extends Component {
 		super(props);
 		this.state = {
 			width: props.width,
+			arr: props.arr,
 			speed: props.speed,
 			comp: 0,
 			swap: 0,
@@ -23,7 +24,9 @@ export default class Draw extends Component {
 		p5.createCanvas(400, 400).parent(parentRef);
 		values = new Array(p5.width / this.state.width);
 		for (let i = 0; i < values.length; i++) {
-			values[i] = Math.floor(p5.random(p5.height));
+			// values[i] = Math.floor(p5.random(p5.height))
+			console.log(this.state.arr[i]);
+			values[i] = this.state.arr[i];
 			clr[i] = -1;
 		}
 		this.bubble(values, p5);
@@ -73,7 +76,7 @@ export default class Draw extends Component {
 	render() {
 		return (
 			<div>
-				<h1> Bubble Sort of {values.length} numbers in array</h1>
+				<h2> Bubble Sort of {values.length} numbers in array</h2>
 				<h3>Number of comparisions: {this.state.comp}</h3>
 				<h4>Number of swaps: {this.state.swap}</h4>
 				<Sketch setup={this.setup} draw={this.draw} />

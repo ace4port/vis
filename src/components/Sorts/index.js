@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import { Button } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import Sketch from "react-p5";
 
 let values = [];
 let val1 = [];
 let val2 = [];
+let valb = [];
+let valQ = [];
+let valM = [];
+let vali = [];
 let v = 50;
 let a1Comp = 0;
 let a2Comp = 0;
@@ -14,28 +19,59 @@ const Sort = (props) => {
 	// const [state, setState] = useState({
 	// 	w,
 	// });
+	const [start, setStart] = useState(false);
 	const [type1, setType] = useState(props.type);
+	useEffect(
+		(p5) => {
+			setType(props.type);
+			genArray(p5);
+		},
+		[],
+		[type1]
+	);
+
 	const genArray = (p5) => {
 		for (let i = 0; i < v; i++) {
-			values[i] = Math.floor(p5.random(p5.height));
+			values[i] = Math.ceil(Math.random() * 400);
 			val1[i] = values[i];
 			val2[i] = values[i];
+			valb[i] = values[i];
+			vali[i] = values[i];
+			valQ[i] = values[i];
+			valQ[i] = values[i];
 		}
 	};
+	const setupBubble = (p5, parentRef) => {
+		p5.createCanvas(400, 400).parent(parentRef);
+		bubble(valb);
+	};
+	const setupInsertion = (p5, parentRef) => {
+		p5.createCanvas(400, 400).parent(parentRef);
+		insertion(vali);
+	};
+	const setupMerge = (p5, parentRef) => {
+		p5.createCanvas(400, 400).parent(parentRef);
+		mergeSort(valM, 0, valM.length - 1);
+	};
+	const setupQuick = (p5, parentRef) => {
+		p5.createCanvas(400, 400).parent(parentRef);
+		quickSort(valQ, 0, valQ.length - 1);
+	};
+
 	const setup1 = (p5, parentRef) => {
-		p5.createCanvas(500, 400).parent(parentRef);
-		genArray(p5);
-		console.log(props);
-		if (type1 == 0 || 1 || 2) bubble(val1);
-		if (type1 == 3 || 4) insertion(val1);
-		if (type1 == 5) mergeSort(val1, 0, val1.length - 1);
+		p5.createCanvas(400, 400).parent(parentRef);
+		insertion(val1);
+		// if (type1 === 0 || 1 || 2) bubble(val1);
+		// else if (type1 === 3 || 4) insertion(val1);
+		// if (type1 === 5)
+		// mergeSort(val1, 0, val1.length - 1);
 	};
 	const setup2 = (p5, parentRef) => {
 		console.log(type1);
-		p5.createCanvas(500, 400).parent(parentRef);
-		if (type1 == 0) insertion(val2);
-		if (type1 == 1 || 3) mergeSort(val2, 0, val2.length - 1);
-		if (type1 == 2 || 4 || 5) quickSort(val2, 0, val2.length - 1);
+		p5.createCanvas(400, 400).parent(parentRef);
+		if (type1 === 0) insertion(val2);
+		else if (type1 === 1 || 3) mergeSort(val2, 0, val2.length - 1);
+		else if (type1 === 2 || 4 || 5) quickSort(val2, 0, val2.length - 1);
 	};
 	const draw1 = (p5) => {
 		p5.background(20);
@@ -55,15 +91,30 @@ const Sort = (props) => {
 	};
 	return (
 		<>
-			<h2>Bubble Sort visualized using React and p5</h2>
+			<h3 style={{ display: "inline-block" }}>
+				Swaps in bubble: {a1Swap} - Swaps in insertion: {a2Swap}
+			</h3>
+			<div styles={{ display: "inline-block" }}>
+				<Button onClick={() => setStart((s) => !s)}>Start</Button>
+			</div>
 			<div style={{ display: "inline-block" }}>
-				<Sketch setup={setup1} draw={draw1} /> {/*Logic to which setup and draw should be called */}
+				{start && (
+					<Sketch
+						setup={type1 === 0 || 1 || 2 ? setupBubble : type1 === 3 || 4 ? setupInsertion : setupMerge}
+						draw={draw1}
+					/>
+				)}
+				{/*Logic to which setup and draw should be called */}
 			</div>
 			<div style={{ display: "inline-block", margin: "20px" }}>
-				<Sketch setup={setup2} draw={draw2} />
+				{start && (
+					<Sketch
+						// setup={type1 === 0 ? setupInsertion : type1 === 1 || 3 ? setupMerge : setupQuick}
+						setup={setupInsertion}
+						draw={draw2}
+					/>
+				)}
 			</div>
-			<h3>Swaps in bubble: {a1Swap}</h3>
-			<h3>Swaps in insertion: {a2Swap}</h3>
 		</>
 	);
 };

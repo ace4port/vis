@@ -2,20 +2,26 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		marginLeft: "20px",
 		display: "flex",
 		flexGrow: 1,
 		width: "100%",
-		"& > * + *": {
-			marginTop: theme.spacing(2),
-		},
+		// height: "100%",
+		bottom: theme.spacing(2),
 	},
-	sld: { width: 400 },
-	content: {
+	paper: {
+		overflow: "hidden",
+		// marginTop: "20px",
+		margin: "3px 1px",
+		height: "100%",
+		borderRadius: "2px",
+		padding: "20px",
 		background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-		flexGrow: 1,
-		marginTop: "100px",
-		paddingTop: "100px",
+	},
+	sld: {
+		display: "grid",
+		alignItems: "center",
+		marginRight: "20px",
+		width: "200px",
 	},
 	title: {
 		flexGrow: 1,
@@ -32,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 	},
 	btnCmp: {
-		margin: theme.spacing(1),
+		margin: "20px 20px",
 	},
 	// content: {
 	// 	flexGrow: 1,

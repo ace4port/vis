@@ -9,6 +9,7 @@ import Compare from "./Pages/Compare";
 import Trav from "./Pages/Tsm";
 import Graph from "./Pages/Graph";
 import Tree from "./Pages/Tree";
+import Tsp from "./Pages/Tsp";
 
 // import Lex from "./components/TSP/Lex";
 import Lex3 from "./components/TSP/Lex3";
@@ -35,13 +36,13 @@ const App = () => {
 					<Tree />
 				</Route>
 				<Route exact path='/lex'>
-					<Trav />
-				</Route>
-				<Route exact path='/lex3'>
-					<Lex3 />
+					<Tsp />
 				</Route>
 				<Route exact path='/srt'>
 					<Sort />
+				</Route>
+				<Route exact path='/tsp'>
+					<Trav />
 				</Route>
 				<Route exact path='*'>
 					<Error />
