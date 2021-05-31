@@ -1,4 +1,5 @@
-Right now Sort and Tsp are working.
+Right now Sort, Tsp and Compare are working. 
+Tree and Tsp using Heuristics still under work
 # View it live [here](https://peaceful-franklin-f53cb9.netlify.app/)
 # Previous [version](https://p5-algovis.netlify.app/)
 
