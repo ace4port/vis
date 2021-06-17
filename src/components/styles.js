@@ -1,52 +1,46 @@
+import { BottomNavigation } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		display: "flex",
-		flexGrow: 1,
-		width: "100%",
-		// height: "100%",
-		bottom: theme.spacing(2),
-	},
-	paper: {
-		overflow: "hidden",
-		// marginTop: "20px",
-		margin: "3px 1px",
-		height: "100%",
-		borderRadius: "2px",
-		padding: "20px",
-		background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-	},
-	sld: {
-		display: "grid",
-		alignItems: "center",
-		marginRight: "20px",
-		width: "200px",
-	},
-	title: {
+	//nav elements
+	logo: {
 		flexGrow: 1,
 	},
 	link: {
 		textDecoration: "none",
-		color: "white",
+		color: "azure",
 	},
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
+
+	//after nav
+	root: {
+		height: "97vh",
 	},
-	selectEmpty: {
-		marginTop: theme.spacing(2),
+
+	paper: {
+		height: "95vh",
+		margin: "3px 1px",
+		padding: "20px",
+		borderRadius: "4px",
+		flexWrap: "wrap",
+		background: "linear-gradient(45deg, rgba(254, 107, 205, 0.885) 30%, rgba(83, 129, 255, 0.795) 90%)",
+		display: "flex",
 	},
-	btnCmp: {
-		margin: "20px 20px",
+	title: {
+		textTransform: "capitalize",
 	},
-	// content: {
-	// 	flexGrow: 1,
-	// 	padding: theme.spacing(3),
-	// },
-	// menuButton: {
-	// 	marginRight: theme.spacing(2),
-	// },
+	footer: {
+		float: "bottom",
+	},
+
+	//form elements
+	sliderWrap: {
+		display: "flex",
+		alignContent: "space-between",
+	},
+	slider: {
+		marginRight: "30px",
+		width: "200px",
+	},
 }));
 
 export default useStyles;
