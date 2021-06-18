@@ -4,6 +4,10 @@ import Sketch from "react-p5";
 let values = [];
 let clr = [];
 
+/**
+ * This returns canvas with bubble sort
+ * @params width, speed
+ */
 export default class Draw extends Component {
 	constructor(props) {
 		super(props);

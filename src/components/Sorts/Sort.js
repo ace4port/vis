@@ -6,6 +6,11 @@ let clr = [];
 let w = [100, 100, 50, 25, 10, 2];
 let s = [1, 5, 50, 250, 500, 1000];
 
+/**
+ * This is independent component that accepts array type, width and speed
+ * @params width, speed- 1-5, array type- bubble, insertion ...
+ */
+
 export default class Draw extends Component {
 	constructor(props) {
 		super(props);
@@ -142,10 +147,7 @@ export default class Draw extends Component {
 		this.incComp();
 		let index = await this.partition(arr, s, e);
 		clr[index] = -1;
-		await Promise.all([
-			this.quickSort(arr, s, index - 1),
-			this.quickSort(arr, index + 1, e),
-		]);
+		await Promise.all([this.quickSort(arr, s, index - 1), this.quickSort(arr, index + 1, e)]);
 	}
 	async partition(arr, s, e) {
 		for (let i = s; i < e; i++) {
@@ -186,8 +188,7 @@ export default class Draw extends Component {
 		return (
 			<div>
 				<h3>
-					Array Size: {values.length} Number of comparisions: {this.state.comp}{" "}
-					- Number of swaps:
+					Array Size: {values.length} Number of comparisions: {this.state.comp} - Number of swaps:
 					{this.state.swap}
 				</h3>
 				<Sketch setup={this.setup} draw={this.draw} />
