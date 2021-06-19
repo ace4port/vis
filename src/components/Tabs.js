@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { Markup } from "interweave";
 
 import { sortData } from "../Data/sortData";
-import Bubble from "./Sorts/Algo/Bubble";
-import Insertion from "./Sorts/Algo/Insertion";
-import Selection from "./Sorts/Algo/Selection";
-import Quick from "./Sorts/Algo/Quick";
-import Merge from "./Sorts/Algo/Merge";
 
 import useStyles from "./styles";
 import PropTypes from "prop-types";
@@ -15,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 // //icons
 import BubbleChart from "@material-ui/icons/BubbleChart";
@@ -24,41 +18,32 @@ import MergeType from "@material-ui/icons/MergeType";
 import AccessTime from "@material-ui/icons/AccessTime";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
-function TabPanel(props) {
-	const { children, value, index, ...other } = props;
-	return (
-		<div role='tabpanel' hidden={value !== index} id={`${index}`} aria-labelledby={`${index}`} {...other}>
-			{value === index && (
-				<Box p={3}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
-}
+import Wrap from "./Sorts/Wrap";
 
-TabPanel.propTypes = {
-	children: PropTypes.node,
-	index: PropTypes.any.isRequired,
-	value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-	return {
-		id: `${index}`,
-		"aria-controls": `${index}`,
-	};
-}
-
+/**
+ * This is a component to render Tabs to hide and show data from a file
+ * @param {none}
+ * @returns JSX Tabs component with 5 sorting algorithms as tabs with description
+ */
 export default function IconTabs() {
 	const classes = useStyles();
 	const [tab, setTab] = useState(0);
-
-	const [type, setType] = useState("bubble");
 	const [visualize, setVisualize] = useState(false);
+	console.log(Markup);
+
 	return (
 		<Paper className={classes.paper}>
 			<Paper square className={classes.tabs}>
+				<div className={classes.btnContainer}>
+					<Button
+						variant='contained'
+						size='small'
+						className={classes.tabBtn}
+						onClick={() => setVisualize((state) => !state)}
+					>
+						{!visualize ? "Visualize" : "Go back"}
+					</Button>
+				</div>
 				<Tabs
 					value={tab}
 					onChange={(event, newValue) => {
@@ -76,31 +61,43 @@ export default function IconTabs() {
 					<Tab icon={<MergeType />} label='Merge Sort' {...a11yProps(4)} />
 				</Tabs>
 				<TabPanel value={tab} index={0}>
-					{!visualize ? <Markup content={sortData[0].markUp} /> : <Bubble width={10} speed={10} />}
+					{!visualize ? <Markup tagName='div' content={sortData[0].markUp} /> : <Wrap type='bubble' />}
 				</TabPanel>
 				<TabPanel value={tab} index={1}>
-					{!visualize ? <Markup content={sortData[1].markUp} /> : <Insertion width={10} speed={10} />}
+					{!visualize ? <Markup tagName='div' content={sortData[1].markUp} /> : <Wrap type='insertion' />}
 				</TabPanel>
 				<TabPanel value={tab} index={2}>
-					{!visualize ? <Markup content={sortData[2].markUp} /> : <Selection />}
+					{!visualize ? <Markup tagName='div' content={sortData[2].markUp} /> : <Wrap type='selection' />}
 				</TabPanel>
 				<TabPanel value={tab} index={3}>
-					{!visualize ? <Markup content={sortData[3].markUp} /> : <Quick width={10} speed={10} />}
+					{!visualize ? <Markup tagName='div' content={sortData[3].markUp} /> : <Wrap type='quick' />}
 				</TabPanel>
 				<TabPanel value={tab} index={4}>
-					{!visualize ? <Markup content={sortData[4].markUp} /> : <Merge width={10} speed={10} />}
+					{!visualize ? <Markup tagName='div' content={sortData[4].markUp} /> : <Wrap type='merge' />}
 				</TabPanel>
 			</Paper>
-			<div className={classes.btnContainer}>
-				<Button
-					variant='contained'
-					size='small'
-					className={classes.tabBtn}
-					onClick={() => setVisualize((state) => !state)}
-				>
-					{!visualize ? "Visualize" : "Show descrription"}
-				</Button>
-			</div>
 		</Paper>
 	);
+}
+
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+	return (
+		<div role='tabpanel' hidden={value !== index} id={`${index}`} aria-labelledby={`${index}`} {...other}>
+			{value === index && <Box>{children}</Box>}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.any.isRequired,
+	value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `${index}`,
+		"aria-controls": `${index}`,
+	};
 }

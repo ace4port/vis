@@ -11,7 +11,7 @@ const Wrapper = () => {
 	return (
 		<div className={classes.root}>
 			<Grid container direction='row' justify='center' alignItems='stretch'>
-				<Grid item xs={4}>
+				<Grid item xs={3}>
 					<Paper className={classes.paper}>
 						<Typography variant='h5' className={classes.title}>
 							Sorting algorithms visualized
@@ -37,7 +37,7 @@ const Wrapper = () => {
 					</Paper>
 				</Grid>
 
-				<Grid item xs={8}>
+				<Grid item xs={9}>
 					<Tabs />
 				</Grid>
 			</Grid>

@@ -48,6 +48,7 @@ export default class Draw extends Component {
 			}
 			let w = this.state.width;
 			p5.rect(i * w, p5.height - values[i], w, values[i]);
+			// p5.line(i, p5.height, i, p5.height - values[i]);
 		}
 	};
 	async bubble(arr, p5) {

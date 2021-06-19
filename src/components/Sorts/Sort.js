@@ -4,7 +4,7 @@ import Sketch from "react-p5";
 let values = [];
 let clr = [];
 let w = [100, 100, 50, 25, 10, 2];
-let s = [1, 5, 50, 250, 500, 1000];
+let s = [1, 5, 50, 100, 250, 500];
 
 /**
  * This is independent component that accepts array type, width and speed
@@ -20,25 +20,33 @@ export default class Draw extends Component {
 			speed: s[props.speed],
 			comp: 0,
 			swap: 0,
+			p0: 0,
+			p1: 0,
 		};
 		this.incComp = this.incComp.bind(this);
 		this.incSwap = this.incSwap.bind(this);
 	}
 	incComp = () => this.setState({ comp: this.state.comp + 1 });
 	incSwap = () => this.setState({ swap: this.state.swap + 1 });
+	setP0 = (ts) => this.setState({ ...this.state, p0: ts });
+	setP1 = (ts) => this.setState({ ...this.state, p1: ts });
 
-	setup = (p5, parentRef) => {
+	setup = async (p5, parentRef) => {
 		p5.createCanvas(500, 400).parent(parentRef);
 		values = new Array(p5.width / this.state.width);
 		for (let i = 0; i < values.length; i++) {
-			values[i] = Math.floor(p5.random(p5.height));
+			values[i] = Math.ceil(p5.random(p5.height));
 			clr[i] = -1;
 		}
-		this.state.type == "bubble"
+		await this.sleep(500);
+		this.setP0(performance.now());
+		this.state.type === "bubble"
 			? this.bubble(values, p5)
-			: this.state.type == "insertion"
+			: this.state.type === "insertion"
 			? this.insertion(values, p5)
-			: this.state.type == "quick"
+			: this.state.type === "selection"
+			? this.selection(values)
+			: this.state.type === "quick"
 			? this.quickSort(values, 0, values.length - 1)
 			: this.mergeSort(values, 0, values.length - 1);
 	};
@@ -53,12 +61,14 @@ export default class Draw extends Component {
 				case 1:
 					p5.fill(0, 255, 255);
 					break;
+				case 2:
+					p5.fill(220, 0, 200);
+					break;
 				default:
 					p5.fill(255, 0, 255);
 			}
 			let w = this.state.width;
 			p5.rect(i * w, p5.height - values[i], w, values[i]);
-			// p5.line(i, p5.height, i, p5.height - values[i]);
 		}
 	};
 
@@ -70,6 +80,9 @@ export default class Draw extends Component {
 				clr[j + 1] = 1;
 				if (arr[j] > arr[j + 1]) await this.swap(arr, j, j + 1);
 				clr[j] = clr[j + 1] = -1;
+			}
+			if (i === values.length - 1) {
+				this.setP1(performance.now());
 			}
 		}
 		p5.noLoop();
@@ -87,9 +100,34 @@ export default class Draw extends Component {
 				clr[j] = clr[j - 1] = -1;
 				j--;
 			}
+			if (i === values.length - 1) this.setP1(performance.now());
 		}
 		p5.noLoop();
 	}
+
+	selection = async () => {
+		let minIndex = 0;
+		let i;
+		for (i = 0; i < values.length - 1; i++) {
+			minIndex = i;
+			clr[i] = 0;
+			for (let j = i + 1; j < values.length; j++) {
+				clr[j] = 1;
+				await this.sleep(this.state.speed);
+				if (values[j] < values[minIndex]) {
+					// if (minIndex !== i)
+					clr[minIndex] = 2; //set background color red
+					minIndex = j;
+				} else {
+					//background color rred
+					clr[j] = 2;
+				}
+			}
+			clr[i] = 0;
+			await this.swap(values, minIndex, i);
+			// await this.sleep(500);
+		}
+	};
 
 	// Merges two subarrays-First is arr[l..m] Second is arr[m+1..r]
 	async merge(arr, l, m, r) {
@@ -189,7 +227,7 @@ export default class Draw extends Component {
 			<div>
 				<h3>
 					Array Size: {values.length} Number of comparisions: {this.state.comp} - Number of swaps:
-					{this.state.swap}
+					{this.state.swap} Time taken {this.state.p1 - this.state.p0} ms
 				</h3>
 				<Sketch setup={this.setup} draw={this.draw} />
 			</div>

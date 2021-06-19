@@ -69,7 +69,6 @@ const Wrapper = () => {
 						<Typography variant='h5' className={classes.title}>
 							Sorting algorithms visualized
 						</Typography>
-						{/* <hr /> */}
 						<Typography variant='h7'>
 							<hr />
 							<b>Tools used</b>: <strong>React</strong> and <strong>p5.js</strong> library

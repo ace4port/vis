@@ -1,11 +1,10 @@
 import React from "react";
-// import Sort from "./components/Sorts/Algo/Selection";
-import IconTabs from "./components/Tabs";
+import Sort from "./components/Sorts/SortF";
 
 const TestApp = () => {
 	return (
 		<div>
-			<IconTabs />
+			<Sort width='5' speed='4' type='merge' />
 		</div>
 	);
 };
