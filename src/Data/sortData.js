@@ -1,9 +1,8 @@
 export const sortData = [
 	{
-		type: "Bubble",
-		markUp: `<h2 style="margin-top: 5px; text-size: 2em; text-align: center;">Bubble Sort</h2> 
-						<div>Bubble sort is a <i>simple sorting algorithm</i> that <b>repeatedly steps(loops)</b> through the list, 
-						<b>compares adjacent elements</b> and <b>swaps</b> them if they are in the <b>wrong order</b><br /> 
+		type: 'Bubble',
+		markUp: `	<div>Bubble sort is a <i>simple sorting algorithm</i> that <b>repeatedly steps(loops)</b> through the list, 
+						<b>compares adjacent elements</b> and <b>swaps</b> them if they are in the <b>wrong order</b>
 						The pass through the list is repeated until the list is sorted. It is a comparison sort, named for the way smaller or 
 						larger elements "bubble" to the top of the list.<hr />
 						This simple algorithm performs <b>poorly</b> in real world use and is used primarily as an <b>educational tool</b>.<br />
@@ -35,9 +34,8 @@ export const sortData = [
 	},
 
 	{
-		type: "Insertion",
-		markUp: `<h2 style="margin-top: 5px; text-size: 2em; text-align: center;">Insertion Sort</h2> 
-						<div>Insertion sort is another <i>simple sorting algorithm</i> that <b>builds the final sorted array (loops)</b> one item at a time
+		type: 'Insertion',
+		markUp: `<div>Insertion sort is another <i>simple sorting algorithm</i> that <b>builds the final sorted array (loops)</b> one item at a time
 						It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort.
 						It is a comparison sort. When people manually sort cards in a bridge hand, most use a method that is similar to insertion sort<hr />
 						
@@ -67,9 +65,8 @@ export const sortData = [
 	},
 
 	{
-		type: "Selection",
-		markUp: `<h2 style="margin-top: 5px; text-size: 2em; text-align: center;">Selection Sort</h2> 
-						<div>Selection sort is an in-place comparison sorting algorithm.
+		type: 'Selection',
+		markUp: `<div>Selection sort is an in-place comparison sorting algorithm.
 						It has an <b>O(n<sup>2</sup>) time complexity</b>, which makes it inefficient on large lists, and generally performs worse 
 						than the similar insertion sort. Selection sort is noted for its simplicity and has performance advantages 
 						over more complicated algorithms in certain situations, particularly where auxiliary memory is limited. 
@@ -96,9 +93,8 @@ export const sortData = [
 	},
 
 	{
-		type: "Quick",
-		markUp: `<h2 style="margin-top: 5px; text-size: 2em; text-align: center;">Quick Sort</h2> 
-						<div>Quick sort is an <i>in-place, divide-and-conquer algorithm</i> is still commonly used.
+		type: 'Quick',
+		markUp: `<div>Quick sort is an <i>in-place, divide-and-conquer algorithm</i> is still commonly used.
 						This algorithm when implemented well, can perform somewhat faster than merge sort and about two or three times faster 
 						than heapsort.
 						It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, 
@@ -131,9 +127,8 @@ export const sortData = [
 	},
 
 	{
-		type: "Merge",
-		markUp: `<h2 style="margin-top: 5px; text-size: 2em; text-align: center;">Merge Sort</h2> 
-						<div>Merge sort is an <i>an efficient, general-purpose, and comparison-based sorting algorithm</i> very commonly used.<br />
+		type: 'Merge',
+		markUp: `<div>Merge sort is an <i>an efficient, general-purpose, and comparison-based sorting algorithm</i> very commonly used.<br />
 						Merge sort is a divide-and-conquer algorithm inventer by John von Neuman in 1945.<br />
 
 						Conceptually, a merge sort works as follows:
@@ -165,4 +160,4 @@ export const sortData = [
 						<hr />Source and Read More: <a href="https://en.wikipedia.org/wiki/Bubble_sort">Wikipedia</a> 
 						<a href="https://www.geeksforgeeks.org/bubble-sort/">Geeks4Geeks</a></div>`,
 	},
-];
+]

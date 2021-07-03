@@ -1,34 +1,33 @@
-import React, { useState } from "react";
-import useStyles from "../styles";
-import { marks } from "../../Data/marks";
+import React, { useState } from 'react'
+import useStyles from '../styles'
+import { marks } from '../../Data/marks'
 
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import FormLabel from "@material-ui/core/FormLabel";
-import Slider from "@material-ui/core/Slider";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Sort from "./SortF";
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import FormLabel from '@material-ui/core/FormLabel'
+import Slider from '@material-ui/core/Slider'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import Sort from './SortF'
+import Blank from './Blank'
 
 const Wrap = ({ type }) => {
-	const classes = useStyles();
+	const classes = useStyles()
 
-	const [controller, setController] = useState(false);
-	const [width, setWidth] = useState(4);
-	const [speed, setSpeed] = useState(2);
+	const [controller, setController] = useState(false)
+	const [width, setWidth] = useState(4)
+	const [speed, setSpeed] = useState(2)
 
-	const [comp, setComp] = useState(0);
-	const [swaps, setSwaps] = useState(0);
-	const [time, setTime] = useState(0);
+	const [comp, setComp] = useState(0)
+	const [swaps, setSwaps] = useState(0)
+	const [time, setTime] = useState(0)
 
-	function valuetext(value) {
-		return `${value}`;
-	}
+	const [arr, setArr] = useState([])
 
 	return (
 		<Grid container direction='row' alignItems='stretch'>
 			<Grid item xs={7}>
-				{controller && <Sort wd={width} spd={speed} type={type} comp={comp} setComp={setSwaps} setSwaps={setSwaps} />}
+				{controller ? <Sort wd={width} spd={speed} type={type} arr={arr} setTime={setTime} /> : <Blank wd={width} setArr={setArr} />}
 			</Grid>
 
 			<Grid item xs={5}>
@@ -36,7 +35,7 @@ const Wrap = ({ type }) => {
 					<FormLabel component='legend'>Array Size</FormLabel>
 					<Slider
 						defaultValue={width}
-						getAriaValueText={valuetext}
+						getAriaValueText={(value) => `${value}`}
 						aria-labelledby='width'
 						name='width'
 						step={1}
@@ -50,7 +49,7 @@ const Wrap = ({ type }) => {
 					<FormLabel component='legend'>Delay</FormLabel>
 					<Slider
 						defaultValue={speed}
-						getAriaValueText={valuetext}
+						getAriaValueText={(value) => `${value}`}
 						aria-labelledby='speed'
 						name='speed'
 						step={1}
@@ -68,7 +67,7 @@ const Wrap = ({ type }) => {
 						type='submit'
 						onClick={() => setController((state) => !state)}
 					>
-						{controller ? "Stop" : "Sort"}
+						{controller ? 'Stop' : 'Sort'}
 					</Button>
 					<Typography variant='h6' className={classes.info}>
 						Array size: {width}
@@ -91,7 +90,7 @@ const Wrap = ({ type }) => {
 				</Paper>
 			</Grid>
 		</Grid>
-	);
-};
+	)
+}
 
-export default Wrap;
+export default Wrap
