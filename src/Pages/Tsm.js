@@ -1,77 +1,76 @@
-import React, { Component } from "react";
-import { Button, Container, Typography } from "@material-ui/core";
-import { Slider, Grid } from "@material-ui/core";
-import { MenuItem, FormHelperText, FormControl } from "@material-ui/core";
-import { InputLabel, Select } from "@material-ui/core";
-import Sketch from "react-p5";
-import Lex2 from "../components/TSP/Lex2";
-import useStyles from "../components/styles";
+import React, { Component } from 'react'
+import { Button, Container, Typography } from '@material-ui/core'
+import { Slider, Grid } from '@material-ui/core'
+import { MenuItem, FormHelperText, FormControl } from '@material-ui/core'
+import { InputLabel, Select } from '@material-ui/core'
+import Sketch from 'react-p5'
+import Lex2 from '../components/TSP/Lex2'
 
-let nodes = [];
-let frame = [2, 5, 10, 30, 60];
+let nodes = []
+let frame = [2, 5, 10, 30, 60]
 
 class Node {
 	constructor(x, y) {
-		this.x = x;
-		this.y = y;
+		this.x = x
+		this.y = y
 	}
 	show(p5) {
-		p5.stroke(255);
-		p5.fill(255, 255, 255);
-		p5.ellipse(this.x, this.y, 5);
+		p5.stroke(255)
+		p5.fill(255, 255, 255)
+		p5.ellipse(this.x, this.y, 5)
 	}
 }
 
 export default class Collect extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			calc: false,
 			speed: frame[4],
 			n: 0,
-		};
-		this.setCalc = this.setCalc.bind(this);
-		this.setSpeed = this.setSpeed.bind(this);
+		}
+		this.setCalc = this.setCalc.bind(this)
+		this.setSpeed = this.setSpeed.bind(this)
 	}
-	setCalc = () => this.setState({ calc: !this.state.calc });
-	setSpeed = (e, s) => this.setState({ speed: s });
+	setCalc = () => this.setState({ calc: !this.state.calc })
+	setSpeed = (e, s) => this.setState({ speed: s })
 
 	setup = (p5, parentRef) => {
-		p5.createCanvas(400, 500).parent(parentRef);
+		p5.createCanvas(400, 500).parent(parentRef)
 		// p5.noLoop();
-	};
+	}
 	genRandom(n) {
 		for (let i = 0; i < n; i++) {
-			let x = new Node(parseInt(Math.random() * 400), parseInt(Math.random() * 400));
-			nodes[i] = x;
+			let x = new Node(parseInt(Math.random() * 400), parseInt(Math.random() * 400))
+			nodes[i] = x
 		}
-		console.log(nodes);
+		console.log(nodes)
 	}
 	draw(p5) {
-		p5.background(20);
-		for (let i = 0; i < nodes.length; i++) nodes[i].show(p5);
+		p5.background(20)
+		for (let i = 0; i < nodes.length; i++) nodes[i].show(p5)
 	}
 	mouseClicked(p5, event) {
-		console.log(event);
-		if (event.target.nodeName == "CANVAS") {
-			let x = new Node(p5.mouseX, p5.mouseY);
-			nodes.push(x);
+		console.log(event)
+		if (event.target.nodeName === 'CANVAS') {
+			let x = new Node(p5.mouseX, p5.mouseY)
+			nodes.push(x)
 		}
-		console.log(nodes.length);
+		console.log(nodes.length)
 	}
 	keyPressed(p5) {
 		if (p5.isLooping()) {
-			p5.noLoop();
+			p5.noLoop()
 		} else {
-			p5.loop();
+			p5.loop()
 		}
-		return false;
+		return false
 	}
 	clearNodes() {
 		while (nodes.length > 0) {
-			nodes.pop();
+			nodes.pop()
 		}
-		console.log(nodes.length);
+		console.log(nodes.length)
 		// nodes = [];
 	}
 	render() {
@@ -140,6 +139,6 @@ export default class Collect extends Component {
 				{this.state.calc && <Lex2 nodes={nodes} speed={this.state.speed} />}
 				{console.log(nodes.length)}
 			</Container>
-		);
+		)
 	}
 }

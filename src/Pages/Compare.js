@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select } from "@material-ui/core";
+import React, { useState, useEffect } from 'react'
+import { Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select } from '@material-ui/core'
 
-import useStyles from "../components/styles";
-import Bubble from "../components/Sorts/Algo/Bubble1";
-import Insertion from "../components/Sorts/Algo/InsertionC";
-import Merge from "../components/Sorts/Algo/MergeC";
-import Quick from "../components/Sorts/Algo/QuickC";
+import useStyles from '../components/styles'
+import Bubble from '../components/Sorts/Algo/Bubble1'
+import Insertion from '../components/Sorts/Algo/InsertionC'
+import Merge from '../components/Sorts/Algo/MergeC'
+import Quick from '../components/Sorts/Algo/QuickC'
 
-let arr = [];
+let arr = []
 
 const Compare = () => {
-	const classes = useStyles();
-	const [cmp1, setCmp1] = useState(0);
-	const [cmp2, setCmp2] = useState(0);
-	const [controller, setController] = useState(false);
+	const classes = useStyles()
+	const [cmp1, setCmp1] = useState(0)
+	const [cmp2, setCmp2] = useState(0)
+	const [controller, setController] = useState(false)
 
 	const compare = () => {
-		setController((state) => !state);
-	};
+		setController((state) => !state)
+	}
 	const gen = () => {
 		for (let i = 0; i < 40; i++) {
-			arr[i] = Math.ceil(Math.random() * 400);
-			console.log(arr[i]);
+			arr[i] = Math.ceil(Math.random() * 400)
+			console.log(arr[i])
 		}
-	};
+	}
 	useEffect(() => {
-		gen();
-	}, [controller]);
+		gen()
+	}, [controller])
 	return (
 		<Grid container>
 			<Grid item xs={3}>
@@ -66,7 +66,7 @@ const Compare = () => {
 					<hr />
 					{/*Controls for sorts to compare */}
 					{controller && (
-						<article style={{ display: "inline-block" }}>
+						<article style={{ display: 'inline-block' }}>
 							{cmp1 === 0 ? (
 								<Bubble width={10} arr={arr} speed={10} />
 							) : cmp1 === 1 ? (
@@ -79,7 +79,7 @@ const Compare = () => {
 						</article>
 					)}
 					{controller && (
-						<article style={{ display: "inline-block" }}>
+						<article style={{ display: 'inline-block' }}>
 							{cmp2 === 0 ? (
 								<Bubble width={10} arr={arr} speed={10} />
 							) : cmp2 === 1 ? (
@@ -94,6 +94,6 @@ const Compare = () => {
 				</Paper>
 			</Grid>
 		</Grid>
-	);
-};
-export default Compare;
+	)
+}
+export default Compare

@@ -1,65 +1,65 @@
-import React, { useState } from "react";
-import Sketch from "react-p5";
-import { Button, Container, Paper, Typography } from "@material-ui/core";
-import { Slider, Grid } from "@material-ui/core";
-import { MenuItem, FormHelperText, FormControl } from "@material-ui/core";
-import { InputLabel, Select } from "@material-ui/core";
-import Lex2 from "../components/TSP/Lex2";
+import React, { useState } from 'react'
+import Sketch from 'react-p5'
+import { Button, Paper, Typography } from '@material-ui/core'
+import { Slider, Grid } from '@material-ui/core'
+import { MenuItem, FormHelperText, FormControl } from '@material-ui/core'
+import { InputLabel, Select } from '@material-ui/core'
+import Lex2 from '../components/TSP/Lex2'
 
-import useStyles from "../components/styles";
+import useStyles from '../components/styles'
 
-let nodes = [];
-let frame = [2, 5, 10, 30, 60];
+let nodes = []
+let frame = [2, 5, 10, 30, 60]
 
 class Node {
 	constructor(x, y) {
-		this.x = x;
-		this.y = y;
+		this.x = x
+		this.y = y
 	}
 	show(p5) {
-		p5.stroke(255);
-		p5.fill(255, 255, 255);
-		p5.ellipse(this.x, this.y, 5);
+		p5.stroke(255)
+		p5.fill(255, 255, 255)
+		p5.ellipse(this.x, this.y, 5)
 	}
 }
 
 const Collect = () => {
-	const classes = useStyles();
-	const [calc, setCalc] = useState(false);
-	const [speed, setSpeed] = useState(frame[4]);
-	const [nodeSize, setNodeSize] = useState(0);
+	const classes = useStyles()
+	const [calc, setCalc] = useState(false)
+	const [speed, setSpeed] = useState(frame[4])
+	const [nodeSize, setNodeSize] = useState(0)
 
 	const setup = (p5, parentRef) => {
-		p5.createCanvas(400, 500).parent(parentRef);
-	};
+		p5.createCanvas(400, 500).parent(parentRef)
+	}
 	const draw = (p5) => {
-		p5.background(20);
-		for (let i = 0; i < nodes.length; i++) nodes[i].show(p5);
+		p5.background(20)
+		for (let i = 0; i < nodes.length; i++) nodes[i].show(p5)
 		// p5.noLoop();
-	};
+	}
 	const mouseClicked = (p5, e) => {
-		console.log(e);
-		if (e.target.nodeName == "CANVAS") {
-			let x = new Node(p5.mouseX, p5.mouseY);
-			nodes.push(x);
+		console.log(e)
+		if (e.target.nodeName === 'CANVAS') {
+			let x = new Node(p5.mouseX, p5.mouseY)
+			nodes.push(x)
 		}
-		console.log(nodes.length);
-	};
+		console.log(nodes.length)
+	}
 
 	const clearNodes = () => {
 		while (nodes.length > 0) {
-			nodes.pop();
+			nodes.pop()
 		}
-		console.log(nodes.length);
-	};
+		console.log(nodes.length)
+	}
 
 	const genRandom = (n, h, w) => {
 		for (let i = 0; i < n; i++) {
-			let x = new Node(parseInt(Math.random() * h), parseInt(Math.random() * w));
-			nodes[i] = x;
+			let x = new Node(parseInt(Math.random() * h), parseInt(Math.random() * w))
+			nodes[i] = x
 		}
-		console.log(nodes);
-	};
+		console.log(nodes)
+	}
 
 	return (
 		<div className={classes.root}>
@@ -128,7 +128,7 @@ const Collect = () => {
 								</Button>
 							</Grid>
 						</Grid>
-						<Grid item style={{ background: "inherit" }}>
+						<Grid item style={{ background: 'inherit' }}>
 							{!calc && <Sketch setup={setup} draw={draw} mouseClicked={mouseClicked} />}
 							{calc && <Lex2 nodes={nodes} speed={speed} />}
 						</Grid>
@@ -141,7 +141,7 @@ const Collect = () => {
 				</Grid>
 			</Grid>
 		</div>
-	);
-};
+	)
+}
 
-export default Collect;
+export default Collect

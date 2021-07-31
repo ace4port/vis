@@ -1,5 +1,4 @@
-import { BottomNavigation } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
 	//nav elements
@@ -7,40 +6,40 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	link: {
-		textDecoration: "none",
-		color: "azure",
+		textDecoration: 'none',
+		color: 'azure',
 	},
 
 	//after nav
 	root: {
-		height: "97vh",
+		height: '97vh',
 	},
 
 	paper: {
-		height: "95vh",
-		margin: "3px 1px",
-		padding: "20px",
-		borderRadius: "4px",
-		flexWrap: "wrap",
-		background: "linear-gradient(45deg, rgba(254, 107, 205, 0.885) 30%, rgba(83, 129, 255, 0.795) 90%)",
-		display: "flex",
+		height: '95vh',
+		margin: '3px 1px',
+		padding: '20px',
+		borderRadius: '4px',
+		flexWrap: 'wrap',
+		background: 'linear-gradient(45deg, rgba(254, 107, 205, 0.885) 30%, rgba(83, 129, 255, 0.795) 90%)',
+		display: 'flex',
 	},
 	title: {
-		textTransform: "capitalize",
+		textTransform: 'capitalize',
 	},
 	footer: {
-		float: "bottom",
+		float: 'bottom',
 	},
 
 	//form elements
 	sliderWrap: {
-		display: "flex",
-		alignContent: "space-between",
+		display: 'flex',
+		alignContent: 'space-between',
 	},
 	slider: {
-		marginRight: "30px",
-		width: "200px",
+		marginRight: '30px',
+		width: '200px',
 	},
-}));
+}))
 
-export default useStyles;
+export default useStyles
